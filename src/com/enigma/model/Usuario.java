@@ -1,25 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.enigma.model;
-
-import java.util.ArrayList;
 
 public class Usuario {
 
-    private Integer id;
+    private int id;
     private String nome;
     private String email;
-    private String endereco;
-    private String tipo;
+    private String celular;
+    private String senha;
+    private int role;
+    private int loc;
 
-    public Integer getId() {
+    public Usuario(int id, String nome, String email, String celular, String senha, int role, int loc) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.celular = celular;
+        this.senha = senha;
+        this.role = role;
+        this.loc = loc;
+    }
+
+    public Usuario() {
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -39,50 +47,37 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getCelular() {
+        return celular;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
-    public ArrayList getUsurios() {
-        return usurios;
+    public int getRole() {
+        return role;
     }
 
-    public void setUsurios(ArrayList usurios) {
-        this.usurios = usurios;
+    public void setRole(int role) {
+        this.role = role;
     }
 
-    ArrayList usurios;
-
-    void selectAll() {
+    public int getLoc() {
+        return loc;
     }
 
-    void selectById() {
+    public void setLoc(int loc) {
+        this.loc = loc;
     }
 
-    void delete() {
-    }
 
-    void update() {
-    }
-
-    void selectEmail() {
-    }
-
-    void selectLast() {
-    }
-
-    void login(String email, String senha) {
-    }
 }

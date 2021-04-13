@@ -1,36 +1,23 @@
 
+import com.enigma.controller.UsuarioControlador;
+import com.enigma.view.admin.FormUsuario;
+import com.enigma.view.admin.Dashboard;
 
-import com.enigma.controller.dao.ClienteDAO;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JOptionPane;
-import com.enigma.model.Cliente;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
+/**
+ *
+ * @author Enigma4rxd
+ */
 public class RunApp {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // LoginPage login =new LoginPage();
-        //login.setLocationRelativeTo(null);
-        // login.setVisible(true);
-
-        // ConnectionDb con = new ConnectionDb();
-        //   if (con.validarLogin("vania@gmail.com", "vania")) {
-        //        JOptionPane.showMessageDialog(null, "LOGIN SUCESSO");
-        //    } else {
-        //     JOptionPane.showMessageDialog(null, "LOGIN ERRO");
-        //   }
-        //
-        //con.closeConnection();
-        ClienteDAO cliDAO = new ClienteDAO();
-
-        List<Cliente> lista = cliDAO.listar();
-
-        for (Cliente cliente : lista) {
-            System.out.println(cliente);
-        }
-    }
-
+       public static void main(String args[]) {
+       Dashboard  v=new Dashboard();
+       
+       v.setVisible(true);
+       
+    } 
 }
