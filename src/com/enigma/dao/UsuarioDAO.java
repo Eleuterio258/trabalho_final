@@ -92,8 +92,20 @@ public class UsuarioDAO {
             con = conn.getConnection();
             ps = con.prepareStatement(sql);
             r = ps.executeUpdate();
+    
         } catch (Exception e) {
         }
         return r;
+    }
+        public boolean login(String email ,String senha) {
+      
+        String sql = "SELECT * FROM  usuario  WHERE nome=? AND senha=?";
+        try {
+            con = conn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.execute();
+        } catch (Exception e) {
+        }
+        return true;
     }
 }
