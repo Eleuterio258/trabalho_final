@@ -97,15 +97,25 @@ public class UsuarioDAO {
         return r;
     }
 
-    public boolean login(String email, String senha) {
-
-        String sql = "SELECT * FROM  usuario  WHERE nome=? AND senha=?";
+    public boolean login(String usuario, String senha) {
+        boolean isUser = false;
+        String sql =  "SELECT * FROM usuario WHERE nome='" + usuario + "' && senha='" + senha+ "'";
         try {
             con = conn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.execute();
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                isUser = true;
+                System.out.println("User authenticated successfully");
+            } else {
+                System.out.println("Invalid username or password!");
+            }
         } catch (Exception e) {
+            System.out.println("DB related Error");
+            e.printStackTrace();
         }
-        return true;
+        return isUser;
+
     }
 }
