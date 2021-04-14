@@ -84,9 +84,9 @@ public class DocumentoControladorTipo implements ActionListener {
             JOptionPane.showMessageDialog(dashboard, "Você deve selecionar uma linha ... !!!");
         } else {
             int id = Integer.parseInt((String) dashboard.tabla.getValueAt(fila, 0).toString());
-            dao.Delete(id);
+            dao.delete(id);
             System.out.println("O resultado é" + id);
-            JOptionPane.showMessageDialog(dashboard, "Usuário excluído ... !!!");
+            JOptionPane.showMessageDialog(dashboard, "Tipo Documento excluído ... !!!");
         }
         cleanTable();
     }
@@ -96,9 +96,9 @@ public class DocumentoControladorTipo implements ActionListener {
 
         p.setNome(nome);
 
-        int r = dao.agregar(p);
+        int r = dao.create(p);
         if (r == 1) {
-            JOptionPane.showMessageDialog(dashboard, "Usuário adicionado com sucesso.");
+            JOptionPane.showMessageDialog(dashboard, "Tipo Documento adicionado com sucesso.");
         } else {
             JOptionPane.showMessageDialog(dashboard, "Error");
         }
@@ -117,9 +117,9 @@ public class DocumentoControladorTipo implements ActionListener {
             p.setId(id);
             p.setNome(nome);
 
-            int r = dao.Actualizar(p);
+            int r = dao.update(p);
             if (r == 1) {
-                JOptionPane.showMessageDialog(dashboard, "Usuário atualizado com sucesso.");
+                JOptionPane.showMessageDialog(dashboard, "Tipo Documento atualizado com sucesso.");
             } else {
                 JOptionPane.showMessageDialog(dashboard, "Error");
             }
@@ -131,7 +131,7 @@ public class DocumentoControladorTipo implements ActionListener {
         centercells(tabla);
         modelo = (DefaultTableModel) tabla.getModel();
         tabla.setModel(modelo);
-        List<DocumentoTipo> lista = dao.listar();
+        List<DocumentoTipo> lista = dao.list();
         Object[] objeto = new Object[6];
         for (int i = 0; i < lista.size(); i++) {
             objeto[0] = lista.get(i).getId();

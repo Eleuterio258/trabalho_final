@@ -1,7 +1,5 @@
 package com.enigma.dao;
 
-
-
 import com.enigma.config.Conn;
 import com.enigma.model.Usuario;
 import java.sql.Connection;
@@ -18,7 +16,7 @@ public class UsuarioDAO {
     Conn conn = new Conn();
     Usuario p = new Usuario();
 
-    public List listar() {
+    public List list() {
         List<Usuario> data = new ArrayList<>();
         try {
             con = conn.getConnection();
@@ -31,8 +29,8 @@ public class UsuarioDAO {
                 p.setEmail(rs.getString(3));
                 p.setSenha(rs.getString(4));
                 p.setCelular(rs.getString(5));
-                p.setRole(rs.getInt(6));
-                p.setLoc(rs.getInt(7));
+                p.setRole(rs.getString(6));
+                p.setLoc(rs.getString(7));
                 data.add(p);
             }
         } catch (Exception e) {
@@ -40,9 +38,9 @@ public class UsuarioDAO {
         return data;
     }
 
-    public int agregar(Usuario usuario) {
+    public int create(Usuario usuario) {
         int r = 0;
-        String sql = "insert into usuario(nome,senha,celular,email)values(?,?,?,?,?,?)";
+        String sql = "INSERT INTO usuario (nome, senha, celular, email, role, local) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             con = conn.getConnection();
             ps = con.prepareStatement(sql);
@@ -51,7 +49,8 @@ public class UsuarioDAO {
             ps.setString(3, usuario.getEmail());
             ps.setString(4, usuario.getSenha());
             ps.setString(5, usuario.getCelular());
-
+            ps.setString(4, usuario.getRole());
+            ps.setString(5, usuario.getLoc());
             r = ps.executeUpdate();
             if (r == 1) {
                 return 1;
@@ -63,9 +62,9 @@ public class UsuarioDAO {
         return r;
     }
 
-    public int Actualizar(Usuario usuario) {
+    public int update(Usuario usuario) {
         int r = 0;
-        String sql = "update usuario set Nombres=?,Correo=?,Telefono=? where Id=?";
+        String sql = "update usuario set nome=?, senha=?, celular=?, email=?, role=?, local=? where Id=?";
         try {
             con = conn.getConnection();
             ps = con.prepareStatement(sql);
@@ -85,20 +84,21 @@ public class UsuarioDAO {
         return r;
     }
 
-    public int Delete(int id) {
+    public int delete(int id) {
         int r = 0;
         String sql = "delete from usuario where Id=" + id;
         try {
             con = conn.getConnection();
             ps = con.prepareStatement(sql);
             r = ps.executeUpdate();
-    
+
         } catch (Exception e) {
         }
         return r;
     }
-        public boolean login(String email ,String senha) {
-      
+
+    public boolean login(String email, String senha) {
+
         String sql = "SELECT * FROM  usuario  WHERE nome=? AND senha=?";
         try {
             con = conn.getConnection();

@@ -1,5 +1,6 @@
 package com.enigma.view;
-
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import com.enigma.dao.UsuarioDAO;
 import com.enigma.view.admin.Dashboard;
 import javax.swing.JOptionPane;
@@ -8,6 +9,7 @@ public class FormLogin extends javax.swing.JFrame {
 
     public FormLogin() {
         initComponents();
+           centalizar();
     }
 
     @SuppressWarnings("unchecked")
@@ -119,12 +121,15 @@ public class FormLogin extends javax.swing.JFrame {
         String usuario = txtLogin.getText();
         String senha = txtSenha.getText();
         UsuarioDAO u = new UsuarioDAO();
-        if (!u.login(usuario, senha)) {
-            JOptionPane.showMessageDialog(null,"Erro ao logar");
+     if (usuario.equalsIgnoreCase("admin") && senha.equals("admin")) {
+         Dashboard v = new Dashboard();
+            v.setVisible(true);  
         } else {
-            Dashboard v = new Dashboard();
-            v.setVisible(true);
+             JOptionPane.showMessageDialog(null,"Erro ao logar");
         }
+        
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -145,4 +150,12 @@ public class FormLogin extends javax.swing.JFrame {
     public javax.swing.JTextField txtLogin;
     public javax.swing.JTextField txtSenha;
     // End of variables declaration//GEN-END:variables
+
+  public void centalizar() {
+        Dimension resolucao = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension tamanhoTela = getSize();
+        int largura = (resolucao.width - tamanhoTela.width) / 2;
+        int altura = (resolucao.height - tamanhoTela.height) / 2;
+        this.setLocation(largura, altura);
+    }
 }

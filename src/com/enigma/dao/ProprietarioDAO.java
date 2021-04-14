@@ -16,7 +16,7 @@ public class ProprietarioDAO {
     Conn conn = new Conn();
     Proprietario p = new Proprietario();
 
-    public List listar() {
+    public List list() {
         List<Proprietario> data = new ArrayList<>();
         try {
             con = conn.getConnection();
@@ -26,8 +26,8 @@ public class ProprietarioDAO {
                 Proprietario p = new Proprietario();
                 p.setId(rs.getInt(1));
                 p.setNome(rs.getString(2));
-                p.setCelular(rs.getString(3));
-                p.setEmail(rs.getString(4));
+                p.setCelular(rs.getString(4));
+                p.setEmail(rs.getString(3));
                 p.setMorrada(rs.getString(5));
                 data.add(p);
             }
@@ -36,9 +36,9 @@ public class ProprietarioDAO {
         return data;
     }
 
-    public int agregar(Proprietario proprietario) {
+    public int create(Proprietario proprietario) {
         int r = 0;
-        String sql = "insert into proprietario(nome,senha,celular,email)values(?,?,?,?,?,?)";
+        String sql = "insert into proprietario(nome,email,celular,localizacao)values(?,?,?,?)";
         try {
             con = conn.getConnection();
             ps = con.prepareStatement(sql);
@@ -58,9 +58,9 @@ public class ProprietarioDAO {
         return r;
     }
 
-    public int Actualizar(Proprietario proprietario) {
+    public int update(Proprietario proprietario) {
         int r = 0;
-        String sql = "update proprietario set nome=?  where Id=?";
+        String sql = "UPDATE proprietario SET nome=?, email=?, celular=?, localizacao=? WHERE  id=?";
         try {
             con = conn.getConnection();
             ps = con.prepareStatement(sql);
@@ -80,7 +80,7 @@ public class ProprietarioDAO {
         return r;
     }
 
-    public int Delete(int id) {
+    public int delete(int id) {
         int r = 0;
         String sql = "delete from proprietario where Id=" + id;
         try {

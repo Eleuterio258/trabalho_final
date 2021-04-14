@@ -50,17 +50,17 @@ public class UsuarioControlador implements ActionListener {
                 String nome = (String) dashboard.tabla.getValueAt(fila, 1);
                 String senha = (String) dashboard.tabla.getValueAt(fila, 2);
                 String email = (String) dashboard.tabla.getValueAt(fila, 3);
-               // String telefone = (String) dashboard.tabla.getValueAt(fila, 4);
-                int role = Integer.parseInt((String) dashboard.tabla.getValueAt(fila, 5).toString());
-                int loc = Integer.parseInt((String) dashboard.tabla.getValueAt(fila, 6).toString());
+                String telefone = (String) dashboard.tabla.getValueAt(fila, 4);
+                String role = (String) dashboard.tabla.getValueAt(fila, 5);
+                String loc = (String) dashboard.tabla.getValueAt(fila, 6);
 
                 dashboard.txtId.setText("" + id);
                 dashboard.txtNome.setText(nome);
                 dashboard.txtEmail.setText(email);
                 dashboard.txtSenha.setText(senha);
-           //     dashboard.txtCelular.setText(telefone);
-                dashboard.comboLocaliza.setSelectedIndex(loc);
-                dashboard.comboRole.setSelectedIndex(role);
+                dashboard.txtCelular.setText(telefone);
+                dashboard.comboLocaliza.setSelectedItem(loc);
+                dashboard.comboRole.setSelectedItem(role);
                 dashboard.btnGuardar.setVisible(false);
             }
         }
@@ -100,7 +100,7 @@ public class UsuarioControlador implements ActionListener {
             JOptionPane.showMessageDialog(dashboard, "Você deve selecionar uma linha ... !!!");
         } else {
             int id = Integer.parseInt((String) dashboard.tabla.getValueAt(fila, 0).toString());
-            dao.Delete(id);
+            dao.delete(id);
             System.out.println("O resultado é" + id);
             JOptionPane.showMessageDialog(dashboard, "Usuário excluído ... !!!");
         }
@@ -112,13 +112,18 @@ public class UsuarioControlador implements ActionListener {
         String email = dashboard.txtEmail.getText();
         String celular = dashboard.txtCelular.getText();
         String senha = dashboard.txtSenha.getText();
+        String loc = (String) dashboard.comboLocaliza.getSelectedItem();
+        String tipo = (String) dashboard.comboRole.getSelectedItem();
+    
 
         p.setNome(nome);
         p.setEmail(email);
+        p.setLoc(nome);
+        p.setRole(email);
         p.setCelular(celular);
         p.setSenha(senha);
 
-        int r = dao.agregar(p);
+        int r = dao.create(p);
         if (r == 1) {
             JOptionPane.showMessageDialog(dashboard, "Usuário adicionado com sucesso.");
         } else {
@@ -143,7 +148,7 @@ public class UsuarioControlador implements ActionListener {
             p.setCelular(celular);
             p.setSenha(senha);
 
-            int r = dao.Actualizar(p);
+            int r = dao.update(p);
             if (r == 1) {
                 JOptionPane.showMessageDialog(dashboard, "Usuário atualizado com sucesso.");
             } else {
@@ -157,13 +162,13 @@ public class UsuarioControlador implements ActionListener {
         centercells(tabla);
         modelo = (DefaultTableModel) tabla.getModel();
         tabla.setModel(modelo);
-        List<Usuario> lista = dao.listar();
+        List<Usuario> lista = dao.list();
         Object[] objeto = new Object[6];
         for (int i = 0; i < lista.size(); i++) {
             objeto[0] = lista.get(i).getId();
             objeto[1] = lista.get(i).getNome();
-            objeto[2] = lista.get(i).getEmail();
-            objeto[3] = lista.get(i).getCelular();
+            objeto[3] = lista.get(i).getEmail();
+            objeto[2] = lista.get(i).getCelular();
             objeto[4] = lista.get(i).getRole();
             objeto[5] = lista.get(i).getLoc();
             modelo.addRow(objeto);

@@ -16,16 +16,33 @@ public class DocumentoDAO {
     Conn conn = new Conn();
     Documento p = new Documento();
 
-    public List listar() {
+    public List list() {
         List<Documento> data = new ArrayList<>();
         try {
             con = conn.getConnection();
-            ps = con.prepareStatement("select * from Documento");
+            ps = con.prepareStatement("select * from documento");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Documento p = new Documento();
                 p.setId(rs.getInt(1));
-       
+
+                data.add(p);
+            }
+        } catch (Exception e) {
+        }
+        return data;
+    }
+    
+        public List listTipo() {
+        List<Documento> data = new ArrayList<>();
+        try {
+            con = conn.getConnection();
+            ps = con.prepareStatement("select * from documentoTipo");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Documento p = new Documento();
+                p.setId(rs.getInt(1));
+
                 data.add(p);
             }
         } catch (Exception e) {
@@ -33,13 +50,12 @@ public class DocumentoDAO {
         return data;
     }
 
-    public int agregar(Documento documento) {
+    public int create(Documento documento) {
         int r = 0;
-        String sql = "insert into Documento(nome,senha,celular,email)values(?,?,?,?,?,?)";
+        String sql = "INSERT INTO documento (tipo,proprietario,validade) VALUES (?,?,?,?)";
         try {
             con = conn.getConnection();
             ps = con.prepareStatement(sql);
-       
 
             r = ps.executeUpdate();
             if (r == 1) {
@@ -52,13 +68,13 @@ public class DocumentoDAO {
         return r;
     }
 
-    public int Actualizar(Documento documento) {
+    public int update(Documento documento) {
         int r = 0;
-        String sql = "update documento set Nombres=?,Correo=?,Telefono=? where Id=?";
+        String sql = "UPDATE documento SET tipo=? proprietario=?,validade=? WHERE  id=?";
         try {
             con = conn.getConnection();
             ps = con.prepareStatement(sql);
-    
+
             ps.setInt(5, documento.getId());
             r = ps.executeUpdate();
             if (r == 1) {
@@ -71,7 +87,7 @@ public class DocumentoDAO {
         return r;
     }
 
-    public int Delete(int id) {
+    public int delete(int id) {
         int r = 0;
         String sql = "delete from documento where Id=" + id;
         try {

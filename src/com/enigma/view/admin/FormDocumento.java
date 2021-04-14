@@ -1,8 +1,12 @@
 package com.enigma.view.admin;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import com.toedter.calendar.JDateChooser;
 public class FormDocumento extends javax.swing.JInternalFrame {
     public FormDocumento() {
         initComponents();
+            centalizar();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -111,7 +115,7 @@ public class FormDocumento extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID", "NOME", "TIPO", "PROPRETARIO", "LOCALIZAÇÃO"
+                "ID", "NOME", "TIPO", "PROPRETARIO"
             }
         ));
         tabla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -162,6 +166,11 @@ public class FormDocumento extends javax.swing.JInternalFrame {
         jLabel6.setText("TIPO");
 
         comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um Item", "Administrandor", "Operador" }));
+        comboTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTipoActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("VALIDADE");
 
@@ -316,7 +325,7 @@ public class FormDocumento extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 293, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -328,6 +337,10 @@ public class FormDocumento extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboTipoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAtualizar;
@@ -361,4 +374,12 @@ public class FormDocumento extends javax.swing.JInternalFrame {
     public javax.swing.JTextField txtPropretaria;
     public javax.swing.JTextField txtValidade;
     // End of variables declaration//GEN-END:variables
+
+    private void centalizar() {
+        Dimension resolucao = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension tamanhoTela = getSize();
+        int largura = (resolucao.width - tamanhoTela.width) / 2;
+        int altura = (resolucao.height - tamanhoTela.height) / 2;
+        this.setLocation(largura, altura);
+    }
 }

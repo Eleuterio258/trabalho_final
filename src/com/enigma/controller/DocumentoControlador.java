@@ -50,11 +50,11 @@ public class DocumentoControlador implements ActionListener {
                 String nome = (String) dashboard.tabla.getValueAt(fila, 1);
                 String pro = (String) dashboard.tabla.getValueAt(fila, 2);
                 String email = (String) dashboard.tabla.getValueAt(fila, 3);
+                int tipo = Integer.parseInt((String) dashboard.tabla.getValueAt(fila, 4));
 
                 dashboard.txtId.setText("" + id);
                 dashboard.txtNome.setText(nome);
                 dashboard.txtPropretaria.setText(pro);
-
                 dashboard.btnGuardar.setVisible(false);
             }
         }
@@ -91,9 +91,9 @@ public class DocumentoControlador implements ActionListener {
             JOptionPane.showMessageDialog(dashboard, "Você deve selecionar uma linha ... !!!");
         } else {
             int id = Integer.parseInt((String) dashboard.tabla.getValueAt(fila, 0).toString());
-            dao.Delete(id);
+            dao.delete(id);
             System.out.println("O resultado é" + id);
-            JOptionPane.showMessageDialog(dashboard, "Usuário excluído ... !!!");
+            JOptionPane.showMessageDialog(dashboard, "Documento excluído ... !!!");
         }
         cleanTable();
     }
@@ -101,15 +101,13 @@ public class DocumentoControlador implements ActionListener {
     public void add() {
         String nome = dashboard.txtNome.getText();
         String propretaria = dashboard.txtPropretaria.getText();
-
         String senha = dashboard.txtPropretaria.getText();
 
         p.setEstado(0);
-    
 
-        int r = dao.agregar(p);
+        int r = dao.create(p);
         if (r == 1) {
-            JOptionPane.showMessageDialog(dashboard, "Usuário adicionado com sucesso.");
+            JOptionPane.showMessageDialog(dashboard, "Documento adicionado com sucesso.");
         } else {
             JOptionPane.showMessageDialog(dashboard, "Error");
         }
@@ -125,11 +123,9 @@ public class DocumentoControlador implements ActionListener {
 
             String senha = dashboard.txtPropretaria.getText();
 
-        
-
-            int r = dao.Actualizar(p);
+            int r = dao.update(p);
             if (r == 1) {
-                JOptionPane.showMessageDialog(dashboard, "Usuário atualizado com sucesso.");
+                JOptionPane.showMessageDialog(dashboard, "Documento atualizado com sucesso.");
             } else {
                 JOptionPane.showMessageDialog(dashboard, "Error");
             }
@@ -141,14 +137,14 @@ public class DocumentoControlador implements ActionListener {
         centercells(tabla);
         modelo = (DefaultTableModel) tabla.getModel();
         tabla.setModel(modelo);
-        List<Documento> lista = dao.listar();
+        List<Documento> lista = dao.list();
         Object[] objeto = new Object[4];
         for (int i = 0; i < lista.size(); i++) {
             objeto[0] = lista.get(i).getId();
             objeto[1] = lista.get(i).getNome();
             objeto[2] = lista.get(i).getValidade();
             objeto[3] = lista.get(i).getProprietario();
-        
+
             modelo.addRow(objeto);
         }
         tabla.setRowHeight(35);

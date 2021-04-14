@@ -1,5 +1,7 @@
 package com.enigma.view.admin;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import com.enigma.controller.DocumentoControladorTipo;
 import com.enigma.controller.ProprietarioControlador;
 import com.enigma.controller.UsuarioControlador;
@@ -9,6 +11,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     public Dashboard() {
         initComponents();
+            centalizar();
     }
 
     @SuppressWarnings("unchecked")
@@ -180,4 +183,12 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     // End of variables declaration//GEN-END:variables
+ public void centalizar() {
+        Dimension resolucao = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension tamanhoTela = getSize();
+        int largura = (resolucao.width - tamanhoTela.width) / 2;
+        int altura = (resolucao.height - tamanhoTela.height) / 2;
+        this.setLocation(largura, altura);
+    }
+
 }

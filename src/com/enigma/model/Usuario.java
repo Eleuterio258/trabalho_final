@@ -7,10 +7,10 @@ public class Usuario {
     private String email;
     private String celular;
     private String senha;
-    private int role;
-    private int loc;
+    private String role;
+    private String loc;
 
-    public Usuario(int id, String nome, String email, String celular, String senha, int role, int loc) {
+    public Usuario(int id, String nome, String email, String celular, String senha, String role, String loc) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -18,9 +18,6 @@ public class Usuario {
         this.senha = senha;
         this.role = role;
         this.loc = loc;
-    }
-
-    public Usuario() {
     }
 
     public int getId() {
@@ -63,21 +60,24 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
-    public int getLoc() {
+    public String getLoc() {
         return loc;
     }
 
-    public void setLoc(int loc) {
+    public void setLoc(String loc) {
         this.loc = loc;
     }
 
+    public Usuario() {
+    }
 
+    
 }

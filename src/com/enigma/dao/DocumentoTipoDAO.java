@@ -18,7 +18,7 @@ public class DocumentoTipoDAO {
     Conn conn = new Conn();
     DocumentoTipo p = new DocumentoTipo();
 
-    public List listar() {
+    public List list() {
         List<DocumentoTipo> data = new ArrayList<>();
         try {
             con = conn.getConnection();
@@ -36,7 +36,7 @@ public class DocumentoTipoDAO {
         return data;
     }
 
-    public int agregar(DocumentoTipo documentoTipo) {
+    public int create(DocumentoTipo documentoTipo) {
         int r = 0;
         String sql = "insert into usuario(nome)values(?)";
         try {
@@ -55,7 +55,7 @@ public class DocumentoTipoDAO {
         return r;
     }
 
-    public int Actualizar(DocumentoTipo documentoTipo) {
+    public int update(DocumentoTipo documentoTipo) {
         int r = 0;
         String sql = "update documentotipo set nome=? where Id=?";
         try {
@@ -75,7 +75,7 @@ public class DocumentoTipoDAO {
         return r;
     }
 
-    public int Delete(int id) {
+    public int delete(int id) {
         int r = 0;
         String sql = "delete from documentotipo where Id=" + id;
         try {
